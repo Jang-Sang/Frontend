@@ -1,0 +1,20 @@
+
+ React에서 CSS 적용 방법
+
+  1. css-in-js
+     ex) css 파일 없이도 하나의 js에서 css 작성 가능
+     - styled-components, emotion
+
+     npm i styled-components
+
+  2. pure css(scss) + post css
+     ex) app.module.css
+
+  3. tailwind
+     ex) 이미 작성된 class명으로 css 작성, 생산성 증가
+     - <div className="" />
+
+  css skill에는 큰 부담을 갖지 않아도 괜찮음
+  css를 알고 있으면 어떤 것이는 적용하는데 큰 어려움이 없음
+
+  -------------------------------------------------------------

@@ -1,0 +1,39 @@
+import styled from "styled-components";
+import { flexCenter } from "styles/common.style";
+
+export const Form = styled.form`
+  width: 360px;
+  background-color: ${({ theme }) => theme.COLORS.white};
+  ${flexCenter};
+  flex-direction: column;
+  padding: 32px 0 0 0;
+`;
+
+export const InputBox = styled.div`
+  width: 80%;
+  height: 48px;
+  ${flexCenter};
+  position: relative;
+  margin-bottom: 16px;
+
+  & input {
+    width: 100%;
+    border: 1px solid #999;
+    border-radius: 5px;
+    height: 100%;
+    text-align: center;
+  }
+
+  & label {
+    position: absolute;
+    left: 15px;
+    top: -5px;
+    font-size: ${({ theme }) => theme.FONT_SIZE.small};
+    background-color: ${({ theme }) => theme.COLORS.white};
+    z-index: 1;
+    padding: 0 5px;
+  }
+`;
+
+// 컴포넌트안에서 싸인에 쓰이는 스타일
+// 하나의 js가 아닌 바깥으로 빼가지고 하는 것
