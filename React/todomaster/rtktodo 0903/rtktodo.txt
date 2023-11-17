@@ -1,0 +1,89 @@
+
+MSW (Mocking Service Worker) 가상 일꾼
+    -> 웹 페이지와 브라우저 사이에서 일하는 가상의 일꾼을 만들어
+       백엔드와 데이터 통신, 오프라인 캐싱, 푸시, 동기화 등을 담당
+
+       * 백엔드가 없어도 가상 일꾼을 통해 본인의 서버와 통신하여
+         데이터를 주고 받을 수 있음
+
+장점
+    1. 개발 초기 단계, 백엔드의 개발이 진행되지 않았을 수 있음
+     -> msw가 있으면 백엔드 없이도 빠르게 프로토 타입 제작이 가능
+        즉, 프론트엔드 개발자가 백엔드와 통신을 유사하게 구현
+
+        * 프론트엔드 개발자의 중요한 덕목
+          내가 만들고자하는 화면에 백엔드에서 받와야하는 데이터는 과연 무엇일까?
+          이를 json data로 구현할 줄 알아야함
+
+    2. 백엔드 서버가 다운되어도 별개로 테스트를 통한 구현이 가능
+      -> 백엔드 서버에 이상, 대체하여 백엔드 서버와 별개로 구현 가능
+      -> api 응답 속도가 느릴 수 있는 경우에도 대체, 더 빠른 개발 가능
+
+    3. 다양한 시도와 시뮬레이션이 가능 -> 백엔드에게 데이터 요청
+
+    npm i msw
+    npx msw init public
+    
+--------
+
+    RTK(redux tool kit)
+      기존의 redux보다 짧은 보일러 코드, 자체적인 미들웨어 지원을 통한 DX(개발자경험) 향상
+      하지만, 여전히 사용에 불편함이 있던 것은 크게 달라지지 않았고 결국엔 사용하기 편리한
+      다양한 라이브러리들이 등장하면서 빛을 발하지는 못했습니다.
+
+      그러나 기존에 redux를 사용한 회사는 rtk로 많이 전환했다
+
+    redux의 백엔드와의 api 통신을 통해 받아온 상태의 전역 관리를 위한 미들웨어
+      1) saga
+        - 제너레이트를 활용, 중간 중간 함수를 중단시킬 수 있음
+        - 작성해야하는 코드량이 많음
+      2) thunk
+        - dispatch를 매개변수로 삼는 고차함수를 활용
+        - redux tool kit에서 자체 지원
+--------
+    eslint, prettier
+      협업하며 코드를 작성할 때, 코드의 포멧과 문법을 일치시켜주는 라이브러리
+--------
+    husky
+      보통 eslint와 prettier 파일 형태로 양식에 맞게 작성
+      그러나 적용을 위해선 특정 명령어를 터미널에 입력해 주거나 모든 파일을 저장
+      그렇지 않으면 코드 포멧팅이 일치하지 않은 상태로 원격 저장소에 올라갈 수 있음
+
+      커밋/푸쉬 전에 자동으로 특정 명령어를 실행시켜 줌으로서
+      eslint, prettier를 자동으로 모든 파일에 맞춰줄 수 있는 라이브러리
+--------
+    npm i -D prettier eslint eslint-plugin-prettier eslint-plugin-react 
+    npm i -D eslint-plugin-unused-imports husky
+
+  * 확장 프로그램
+    eslint-plugin-prettier : 기존에 있는 eslint에 prettier 기능과 prettier 충돌
+    eslint-plugin-react : eslint가 react 문법에 맞게 적용
+    eslint-plugin-unused-imports : 사용하지 않는 import를 자동 삭제
+
+  * 
+    개발도중 생긴 에러, 라이브러리 최신 버전의 문제, 깃허브나 퍼블릭 포럼을 이용하여 해결 방법을 찾고
+    일회성으로 도입, 물론 이 이슈는 해결이 되지 않아서 앞으로도 계속 이렇게 될 수는 있음
+
+  *
+    eslint-plugin-unused-imports -> v3 -> @typescript-eslint/eslint-plugin v6.00
+    @typescript-eslint/eslint-plugin -> 5.60 -> update
+
+    npm i -D @typescript-eslint/parser@latest
+    npm i -D @typescript-eslint/eslint-plugin 
+    npm i -D eslint-plugin-unused-imports
+--------
+
+  husky
+
+  1. npx husky install --> .husky
+  2. package.json -> script
+      "postinstall" : "husky install" -> npm i 하기 전에 npx husky install부터 한다
+                                      -> 다른 개발자들(협업)이 husky를 사용할 수 있도록
+  
+  3. commit/push 이전에 실행할 명령어
+        npx husky add .husky/pre-commit "npm run format && npm run lint:fix"
+        git add . git commit
+
+-------
+  npm run --> package.json의 scripts에 정의된 명령어를 실행
+  => prettier, eslint => 왜 사용해야하는가 => 똑같은 설정 위해 rc 파일 작성 및 공유 => husky로 깃훅 셋팅(pre-commit, pre-push)
