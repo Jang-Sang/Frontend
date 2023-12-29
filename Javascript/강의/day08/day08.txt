@@ -1,0 +1,243 @@
+
+ DOM API
+    (Document Object Model) 문서 객체 모델
+        흔히 HTML에서 사용하는 div, span, input과 같은 요소를 DOM이라고 한다
+
+    (Application Programming Interface) API
+        응용 프로그램 사이에서 통신에 사용되는 언어와 메시지를 이야기 합니다.
+
+ -------------------------------------------------------------------------
+
+ DOM selector
+
+    ex)
+        <div id='menu'></div>
+
+        HttpCollection - Live
+        NodeList - noneLive
+
+    1. document.getElementById() // 단일 객체 반환
+    2. document.getElementsByClassName() // 유사 배열 객체 반환
+        - HttpCollection
+    3. document.getElementsByTagName()
+        - HttpCollection
+    4. document.getElementsByName() 
+        - NodeList
+    5. document.querySelector() // 단일 객체 반환
+    6. document.querySelectorAll()
+        - NodeList
+
+    react는 DOM의 접근을 지향한다. 사용 못하는건 아니지만 권장하지는 않음.  
+    모바일로 갈거면 react-native,flutter가 시장을 반반 지배한다.  
+
+
+    * NodeList vs HttpCollection
+    HttpCollection: live  , 유사 배열 객체 + 이터러블
+    라이브하다는것 - 상태변화를 실시간으로 감지할 수 있다는 것
+    NodeList: none-live , 유사 배열 객체 + 이터러블
+
+    두개의 차이를 확실히 볼 수 있는 곳은 반복문이다.
+
+        ex) 
+            <div class="red"/> 
+            <div class="red"/> 
+            <div class="red"/> 
+
+            // const $els = document.getElementsByClassName('red')
+            const $els = document.querySelectorAll('.red')
+
+            for(let i =0; i<$els.length; i++){
+                $els[i].className = 'blue'
+            }
+
+    * 유사배열객체
+    객체는 객체인데 배열의 속성을 가지고 있는 객체
+        let obj {
+            0: '1',
+            1: '2',
+            length: 2
+        }
+
+        for(let i=0; i<obj.length; i++){
+            console.log(obj[i])
+        }
+
+
+    * for of(o) for(o)
+    * forEach(x) map,filter(x)
+    * NodeList는 forEach 사용이 가능, 단 배열 메서드 사용불가 
+
+    * HTMLCollection, NodeList을 배열로 사용하고 싶다라고하면 배열로 제작해야 한다.
+    유사배열 객체 배열로 제작할 수 있다.
+        (1) Array.from(els)
+        (2) const arr = [...els]  전개연산자
+        (3) HTMLCollection.prototype.forEach = Array.prototype.forEach (권장x)
+            프로토타입을 추가해서 사용, 단 한번 사용하면 모든 http를 사용하는 거라 권장하지 않는다.
+        클래스를 써서 새로운 인스턴스를 추가해서 사용하는 것을 추천
+
+        사용의도에 따른 선택
+        HttpCollection은 실시간 적용이 되서 확인이 가능하다.
+
+-------------------------------------------------------------------------------------------------------
+
+    DomAPI 왜 사용할까?
+        
+        사용자의 행위에 따라
+        HTML 요소(div,span)의 properties를 바꾸기 위해 사용합니다
+
+        => html, css 정적인 페이지 => 동적으로 만들기 위해서
+        요즘에는 css에도 많은 기능(hover라던지 기타등등)이 추가되어 많이 달라졌다.
+
+-------------------------------------------------------------------------------------------------------
+
+    properties (속성)
+
+        개발자 도구에서 확인 가능, DOM API를 사용하는 궁극적인 목표
+
+        value
+        innerText
+        innerHTML
+        style
+        classList
+        onclick
+        onchange
+        ...
+        event...
+
+-------------------------------------------------------------------------------------------------------
+
+    addEventListener
+
+        자바스크립트에서 가장 권장되는 이벤트 등록 방식
+                                     ------ 사용자의 행위
+
+        ex)
+        Dom || window.addEventListener("이벤트명", 콜백함수, options)
+
+        document.getElementById("user-name").addEventListener('click', ()=>{ console.log("클릭되었습니다")} )
+       
+        
+        자주 사용하는 이벤트명
+
+        click : 요소를 클릭했을 때
+        
+        mouseover : 요소에 마우스를 올렸을 때
+        mouseleave : 요소에서 마우스가 떠났을 때
+        mousedown : 요소를 누르고 마우스를 아직 때기 이전인 상태
+        mouseup : 요소를 누르고 마우스를 땐 상태
+
+        mousewheel : 마우스 휠이 이동되었을 때
+        mousemove : 마우스가 움직일 때 마다
+        
+        focus : 폼 요소의 입력 요소가 활성화 되어있을 때
+        blur : 포커스에서 벗어났을 때
+        change : 폼 요소의 입력 요소의 값이 변경되었을 때 
+
+        keypress : 키를 처음 누른 순간
+        keyup : 키를 눌렀따가 땐 순간
+        keydown : 키를 누르고 때기 이전일 때
+
+        
+        widnow, document
+
+        load - 웹 페이지가 로드 되었을 때
+        * resize - 웹 페이지의 사이즈가 조정 되었을 때 - 반응형 웹을 만들때 중요하다
+        scroll - 스크롤바의 움직임이 생겼을 때
+        unload - 웹 페이지가 닫혔을 때
+
+
+-- 페이지가 리사이즈 되었을 때 변수에 값을 재할당 (돔요소가 전역변수로 활용 되었을 때 동적으로 요소에 접근)
+let $dom = document.getElementById("seongyong").width
+widnow.addEventListener('resize',()=> {
+    $dom = document.getElementById("seongyong").width
+})
+
+
+-- 특정 이벤트가 일어났을 때 특정 요소의 길이를 선언
+document.getElementById("button').addEventListener("click",()=>{
+    let $dom = document.getElementById("seongyong").width
+})
+-- 웬만한 이벤트는 이걸로 해결이 되지만 위에 전역변수를 사용시 등 특정한 상황에서는 필요하다.
+
+react 사용시 dom api에 접근하지 않는다.
+react에서 dom api에 접근할 필요가 없어서 사용을 잘 안할 뿐이지 사용을 아예 안하는건 아니다.
+document에 접근할 때도 종종 있다.
+
+------------------------------------------------------------------------------------------------------------
+
+classList
+
+    해당 요소가 가지고 있는 클래스의 목록을 나타내는 DOM properties
+
+    <div class="seongyong on add flex"/>
+
+    document.getElementsByClassName("seongyong").classList
+    // seongyong on add flex
+
+    classList.contain("on")
+        해당 클래스가 있는지 없는지 여부를 판단하여 boolean 형태로 반환
+ 
+    classList.add("class")
+        해당 요소에 인자로 전달된 클래스를 DOM에 추가
+
+    classList.remove("class")
+        해당 요소에 인자로 전달된 클래스를 DOM에서 제거
+
+    ex)
+        <div class="tab" />
+        <div class="tab" />
+        <div class="tab on" />
+        <div class="tab" />
+        <div class="tab" />
+
+
+        const tabs = document.querySelectorAll(".tab")
+      
+
+        tabs.forEach((el)=>{
+            el.addEventListener('click', (e)=>{
+                console.log(e)
+                const selectTab = e.target;
+                selectTab.classList.add('on')
+            })
+        })
+        클릭된 클래스가 전달된다.
+
+        ** this (이거, 자기 자신)
+            자바스크립의 this는 동적으로 바인딩(결정) 되며
+            => 누가 this를 불렀는가에 따라서 값이 바뀐다
+
+        addEventListener의 this는 이벤트 자체를 불러옵니다.
+        따라서 이벤트가 일어난 대상을 찾기위해선 e.target을 통해 명확한 요소를 불러올 수 있음
+
+------------------------------------------------------------------------------------------------------------
+
+    attribute(속성)
+        setAttribute("속성명", 속성값) - 설정
+        getAttribute("속성명") - 속성 값의 조회
+        removeAttribute("속성명") - 삭제
+
+------------------------------------------------------------------------------------------------------------
+
+    캡쳐링, 버블링
+
+    버블링
+        한 요소에 이벤트가 발생되면, 이어서 부모 요소의 핸들러가 동작
+        => 하위 요소의 이벤트가 부모 요소의 이벤트로 전파
+
+
+    캡쳐링
+        버블링과는 반대, 부모 요소를 클릭했을 때 하위 요소로 이벤트가 전파되는 것
+        캡쳐링의 기본 옵션은 false
+        addEventListener의 options 인자로 t/f를 변동 가능
+
+        ex)
+        el.addEventListener('click', function(){}, true)
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+    이벤트 전파 방지
+
+--------------------------------------------------------------------------------------------------------------
