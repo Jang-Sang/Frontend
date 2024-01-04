@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+</head>
+<body>
+    <script>
+        const BAKEND_URL = 'https://jsonplaceholder.typicode.com/posts';
+        const req = new XMLHttpRequest();
+        // req => http request 객체 생성
+
+        req.open('GET', BAKEND_URL)
+        // http request 객체에 GET으로  BACKEND_URL 등록
+        req.send();
+        // request message 전송 ---> backend URL 
+
+        req.addEventListener('load', (res) => {
+            console.log(res.currentTarget.response)
+        })
+        // req 실행 시점
+        // req 생성 -> 요청 전송 -> 응답 console.log
+
+        /* 
+        jQuery
+            $ajax({
+                method: "GET",
+                url: BAKEND_URL
+            }).then((res)=>{
+                console.log(res)1
+            })      
+        */
+    </script>
+</body>
+</html>
