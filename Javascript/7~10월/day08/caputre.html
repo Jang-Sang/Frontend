@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>캡쳐링</title>
+        <style>
+            body * {
+                margin: 10px;
+                border: 1px solid #00f;
+            }
+        </style>
+    </head>
+    <body>
+        <form>
+            FORM
+            <div>
+                DIV
+                <p>P</p>
+            </div>
+        </form>
+        <script>
+            const els = document.querySelectorAll('*');
+            // 모든요소를 가져옴
+            for (let el of els) {
+                // 각 요소마다 클릭했을 때 이벤트 추가
+                el.addEventListener(
+                    'click',
+                    (e) => {
+                        // e.stopPropagation()
+                        alert(el.tagName);
+                        // 해당 요소의 태그 이름을 alert로 띄워주는 이벤트
+                    },
+                    true // true, false 생략 가능, 캡쳐링 옵션 변경
+                );
+            }
+        </script>
+    </body>
+</html>

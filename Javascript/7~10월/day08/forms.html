@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      form {
+        width : 280px;
+        display : flex;
+        flex-direction : column;
+        justify-content : center;
+        align-items : center;
+      }
+
+      p {
+        display : flex;
+        justify-content : space-between;
+        align-self : stretch;
+      }
+    </style>
+</head>
+<body>
+   <h2>로그인</h2>
+   <form action = "#"> 
+      <p><span>이메일</span><input type="text"name="user-email"></p>
+      <p><span>비밀번호</span><input type="password"name="user-pw"></p>
+      <button>제출</button>
+   </form>
+
+   <script>
+      const form = document.getElementsByTagName('form')[0]
+
+      // 폼태그에 이벤트 추가, 제출이벤트, 이벤트를 매개변수로 받아서 콘솔로 출력하는
+      //
+      form.addEventListener('submit', (e) => {
+        event.preventDefault()
+        // form 이벤트가 가지고 있는 기본 이벤트 속성을 정지
+        console.log(e)
+        // e는 addEventListner가 일으킨 event를 의미
+        // e.target은 해당 event가 발생한 요소
+        // form 요소의 elements에는 name으로 주어진 요소들이 존재
+        console.log(e.target.elements.userEmail, e.target.elements.userPw)
+      }) // 위에 name="" 여기서 각각 elements를 가져오는 것
+   </script>
+</body>
+ 
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <style>
+          .board-list {
+            width : 920px;
+            margin : 0 auto;
+          }
+
+          .board-list > article {
+            background-color : #000;
+          }
+
+          .board-list > article > div {
+            border : 1px solid #fff;
+          }
+
+          .flex-center{
+            display : flex;
+            justify-content : center;
+            align-items : center;
+          }
+
+        </style>
+    </head>
+    <body>
+
+       <div class="board-list">
+        <!-- post form -->
+        <form>
+          <p>제목 : <input/></p>
+          <label>내용</label>
+          <textarea></textarea>
+          <button>작성</button>
+        </form>
+        <!-- board list -->
+        <article class="board-card">
+          <h3 class="flex-center">example-title
+            <button>삭제</button>
+          </h3>
+          <div>
+            example-content
+          </div>
+        </article>
+        <!-- board detail -->
+        <div>
+          <button>수정</button>
+          <p>example-title</p>
+          <div>example-content</div>
+        </div>
+       </div>
+    </body>
+</html>
