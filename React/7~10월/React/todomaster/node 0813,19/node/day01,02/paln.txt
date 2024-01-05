@@ -1,0 +1,15 @@
+
+[7주]
+2주차 'dbms, nodejs-기본'
+3주차 'route-api, auth logic -- front(access_token, refresh_token)'
+4주차 1. backend-api >> github -> 다른 사람 사용 -> 트랙핑 발생 -> 과다 -> 과금
+     2. 2주차, 3주차에 구현한 백엔드 기반으로 직접 로컬 환경에서 구현 (o)
+     3. axios-todo (backend <-> frontend)
+
+1주차 rtk, msw, storybook
+2주차 recoil, react-query
+3주차 typescript, react-typescript
+4주차 최종 마무리, 촛불 시간(현재 남은 분들 개개인 마다 실력, 공부 성향 --> 앞으로), 지원할 수 있는 공부
+
+부록 test-code
+동료 학습 하시는 분들은 끝x => project (한달 반)
