@@ -20,20 +20,18 @@ const c = 7;
 문자열 내에서 변수를 사용하는 방법
 문자열 = " ", ' ', ` `
  */
-console.log('a의값은' + a + '입니다'); // +
-console.log('a의값은', a, '입니다'); // ,
+console.log("a의값은" + a + "입니다"); // +
+console.log("a의값은", a, "입니다"); // ,
 
 console.log(`a의값은 ${a}입니다`); // ${}, ` `(백쿼트)
 
-
-
 a = 5;
-if(a===4){
-    ...
+if (a === 4) {
+  //참일때
+  console.log(a);
 } else {
-    //에러처리
-    console.error(a)
+  //에러처리
+  console.error(a);
 }
-
 
 //자바스크립트는 위에서 아래로 인식
