@@ -1,7 +1,0 @@
-코드를 기존 todolist에서 가져와야 했던 것
-1. 기존 데이터가 담긴 src
-2. 경로가 담긴 jsconfig.json
-3. 패키지에 다운로드 받았던 라이브러리들 package.json, package-lock.json
-옮겨야 하는 곳에 겹치는 걸 일단 지우고 복사해서 옮기기, 그냥 옮기면 그냥 이동만 된다.
-
-
