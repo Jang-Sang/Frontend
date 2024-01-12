@@ -659,102 +659,83 @@
 
 ---
 
-    React 프로젝트 생성
-        1. CRA(create-react-app)
-        2. vite - 최근에는 대부분 더 많이 사용된다. / 더 빠른 속도와 설치 속도 / 하지만 안정성때문에 일단은 공부할 때는 CRA 사용
-                - (esbuild, 번들링 없이 프로젝트 빠르게 빌드한다.)
+### React 프로젝트 생성
 
-        1. 터미널 경로 지정
-        2. 생성 명령어 입력
-            npx create-react-app 프로젝트명
+    1. CRA(create-react-app)
+    2. vite - 최근에는 대부분 더 많이 사용된다. / 더 빠른 속도와 설치 속도 / 하지만 안정성때문에 일단은 공부할 때는 CRA 사용
+            - (esbuild, 번들링 없이 프로젝트 빠르게 빌드한다.)
+
+    1. 터미널 경로 지정
+    2. 생성 명령어 입력 npx create-react-app 프로젝트명
 
 ---
 
-    프로젝트 구조
-        node_modules : 현재 프로젝트에 설치된 라이브러리들의 실제 코드들이 저장 용량이 큼, git에 올리지 않음
-                        -- package에 의해서 설치되었었던 목록이 이미 저장
-                        -- npm install
-                        -- package.json에 있는 라이브러리를 자동으로 설치
-                        -- 실제 리엑트에서 대부분의 용량을 차지 / git에서는 제외
+## 프로젝트 구조
 
-        public : 정적 파일 관리, 페비콘, index.html, sitemap.xml, robots.text
+    node_modules : 현재 프로젝트에 설치된 라이브러리들의 실제 코드들이 저장 용량이 큼, git에 올리지 않음
+                    -- package에 의해서 설치되었었던 목록이 이미 저장
+                    -- npm install
+                    -- package.json에 있는 라이브러리를 자동으로 설치
+                    -- 실제 리엑트에서 대부분의 용량을 차지 / git에서는 제외
+
+    public : 정적 파일 관리, 페비콘, index.html, sitemap.xml, robots.text
             나중에 SEO에 필요한 파일, 검색엔진에 가이드라인을 제공하는 파일, 검색엔진에 어떤것이라는지 설명 + 이런 것을 노출하고 싶지않다라는 설명
-        src : 개발이 진행되는 곳 / 내가 개발하는 고의 모든 파일이 들어있다.
-        gitignore : git에 커밋하고 싶지 않은 파일을 정리. 기본 세팅이 있긴하지만 추가하고 싶으면 직접 작성해서 추가한다.
-        package-lock.json : 해당 라이브러리의 설치 가능한 주소들이 저장
-        package.json : 설치된 라이브러리의 목록과 버전을 관리, 실행 스크립트(명령어) 관리
+    src : 개발이 진행되는 곳 / 내가 개발하는 고의 모든 파일이 들어있다.
+    gitignore : git에 커밋하고 싶지 않은 파일을 정리. 기본 세팅이 있긴하지만 추가하고 싶으면 직접 작성해서 추가한다.
+    package-lock.json : 해당 라이브러리의 설치 가능한 주소들이 저장
+    package.json : 설치된 라이브러리의 목록과 버전을 관리, 실행 스크립트(명령어) 관리
+                -- npm start 로컬 환경에서 프론트엔드 서버를 실행
+                -- npm run build 프로젝트 배포 이전에 가능한 최소한의 경량화된 사이즈로 코드를 빌드
+                -- npm run test 테스트 코드 실행 - QA넘기기 전에 개발자들이 먼저 테스트를 해보기 위해 만들어진 코드
+                -- npm run eject 숨겨진 설정 파일을 보여주는 것
+                -- 스크립트는 커스텀도 가능
+                번들링을 통해 작은 파일로 만들어 배포한다.
 
-                        -- npm start 로컬 환경에서 프론트엔드 서버를 실행
-                        -- npm run build 프로젝트 배포 이전에 가능한 최소한의 경량화된 사이즈로 코드를 빌드
-                        -- npm run test 테스트 코드 실행 - QA넘기기 전에 개발자들이 먼저 테스트를 해보기 위해 만들어진 코드
-                        -- npm run eject 숨겨진 설정 파일을 보여주는 것
-                        -- 스크립트는 커스텀도 가능
+### src의 구조
 
-                        번들링을 통해 작은 파일로 만들어 배포한다.
-
----
-
-    src의 구조
-        App.css -> App.js에 참조되는 기본 css파일 - 변경 가능
-        App.js  -> index.js를 통해 index.html에 전달되어 보여지는 실제 컴포넌트
-                -> 라우팅(주소 설정), 라이브러리 설정
-        App.test.js -> 테스트 코드 샘플
-        index.xss -> app.css와 동일
-        index.js -> 최상위 컴포넌트, index.html의 root에 app.js를 랜더링시키는 역할
-        reportWebvitals.js -> 프론트엔드 성능 체크, 더 좋은 도구가 많아서 사용X
-        setupTests.js -> test-code에 필요한 라이브러리 전역 설정
+    App.css -> App.js에 참조되는 기본 css파일 - 변경 가능
+    App.js  -> index.js를 통해 index.html에 전달되어 보여지는 실제 컴포넌트
+            -> 라우팅(주소 설정), 라이브러리 설정
+    App.test.js -> 테스트 코드 샘플
+    index.xss -> app.css와 동일
+    index.js -> 최상위 컴포넌트, index.html의 root에 app.js를 랜더링시키는 역할
+    reportWebvitals.js -> 프론트엔드 성능 체크, 더 좋은 도구가 많아서 사용X
+    setupTests.js -> test-code에 필요한 라이브러리 전역 설정
 
 ---
 
-    바벨, 모듈번들러, react의 컴포넌트를 직접 생성, 폴더 구조, styled-Components(css-in-js)
-    tailwind(소개)
-
-
-    리엑트에 관한 정리 글 블로그에 올리기
-    - 면접,자기 어필, 사용법이 중요한 것보다 내가 이런걸 공부했다라는 걸 보여주는 것
-    프로젝트 회고록 블로그 올리기
-
-
+## Webpack
 
     webpack : CRA에 기본 설정으로 되어있는 모듈 번들러
-        모듈 : 한 가지 이상의 기능을 분리한 코드의 집합, 분리한 코드 덩어리
-        번들러 : 묶어주는 것
+    모듈 : 한 가지 이상의 기능을 분리한 코드의 집합, 분리한 코드 덩어리
+    번들러 : 묶어주는 것
 
     너저분하게 분리되어있는 리소스들을 특정 카테고리나 묶음으로 묶어서 정리해주는 역할
     연산 시간이 줄어들어 랜더링 비용이 감소
     이거 없으면 리액트 없었다.
 
-    * 장점 - 모듈단위의 개발이 가능
-            네트워크 연산 비용 감소
-            loader를 통해 js가 로드된다.
+    * 장점 - 모듈단위의 개발이 가능, 네트워크 연산 비용 감소, loader를 통해 js가 로드된다.
 
 ---
 
-    babel (트랜스파일러)
-        ES6 이후를 모던 자바스크립트
+## babel (트랜스파일러)
 
-        최신 문법을 이해하지 못하는 웹 브라우저들이 존재
-        해당 브러우저에 존재하는 로더가 문법을 이해할 수 있도록
-        저레벨의 문법으로 트랜스파일(변환)하는 과정
-
-        *react는 그 중 바벨의 4가지 모듈
-        1. @babel/core : 핵심요소
-        2. @babel/cli : 명령어를 통해 바벨을 사용할 수 있도록
-        3. @babel/preset-env : 바벨의 기본적인 설정
-        4. @babel/preset-react : 바벨이 JSX문법을 이해할 수 있도록
-
----
+    ES6 이후를 모던 자바스크립트
+    최신 문법을 이해하지 못하는 웹 브라우저들이 존재
+    해당 브러우저에 존재하는 로더가 문법을 이해할 수 있도록
+    저레벨의 문법으로 트랜스파일(변환)하는 과정
+    *react는 그 중 바벨의 4가지 모듈
+    1. @babel/core : 핵심요소
+    2. @babel/cli : 명령어를 통해 바벨을 사용할 수 있도록
+    3. @babel/preset-env : 바벨의 기본적인 설정
+    4. @babel/preset-react : 바벨이 JSX문법을 이해할 수 있도록
 
     이 모든게 없어도 react를 javascript에서 돌아갈 수 있도록 할 수 있지만 webpack과 babel을 대체할 수 있는 것을 스스로 만들어야 한다.
     그러므로 webpack과 babel은 필수다.
 
-    * 어떤 개발자인가요? (개발자로서의 가치관)
-    - 일관성 / 내용의 통일성이 중요하다
-    - 다른 사람을 이끌기보단 받쳐주는 사람 / 다른 사람의 작은 의견이라도 무시하지 않고 한번이라도 고려해보는
-
 ---
 
-    리엑트의 폴더 구조
+## 리엑트의 폴더 구조
 
     1. Container/Presentational 폴더 구조
         - 예전에 많이 사용하던 폴더 구조
@@ -790,23 +771,19 @@
 
 ---
 
-    react-router-dom
+## react-router-dom
 
-        router : 네트워크 데이터 전송 (소포)
-
-        => react에서 dom을 전달하기 위해 사용하는 소포 (주소에 따른 보여줄 DOM 설정에 관한 라이브러리)
-
-        => SPA에 최적화
-
-        npm i react-router-dom
-
-        react-routerdom 깃허브에 많은 자료가 있다
-        공식문서에도 많은 예제와 기본 개념이 있다.
-        (1순위 찾아볼 곳)
+    router : 네트워크 데이터 전송 (소포)
+    => react에서 dom을 전달하기 위해 사용하는 소포 (주소에 따른 보여줄 DOM 설정에 관한 라이브러리)
+    => SPA에 최적화
+    npm i react-router-dom
+    react-routerdom 깃허브에 많은 자료가 있다
+    공식문서에도 많은 예제와 기본 개념이 있다.
+    (1순위 찾아볼 곳)
 
 ---
 
-    todoList 폴더 구조 - 폴더의 이름은 무엇이라도 바꿀 수 있다. 이름에 집착 금지!!
+### todoList 폴더 구조 - 폴더의 이름은 무엇이라도 바꿀 수 있다. 이름에 집착 금지!!
 
     src
         components
@@ -844,39 +821,31 @@
 
 ---
 
-    RTFM ("Read The Fucking Menual")
-        - 언제나 가장 많은 정보는 공식 홈페이지에 있다. 그니까 공식 홈페이지를 읽어라.
+### React에서 CSS 적용 방법
 
-    npm 관련 오류는 추천 명령어 입력시 80%는 해결가능
-    git 관련 오류는 50%정도 해결가능
+    1. css-in-js
+    ex) css 파일 없이도 하나의 js에서 css 작성 가능
+    - styled-components, emotion
+    npm i styled-components
 
-React에서 CSS 적용 방법
+    2. pure css(scss) + post css
+    ex) app.module.css
 
-1. css-in-js
-   ex) css 파일 없이도 하나의 js에서 css 작성 가능
+    3. tailwind
+    ex) 이미 작성된 class명으로 css 작성, 생산성 증가
+    - <div className="" />
+    클래스명만 잘 써주면 된다.
 
-   - styled-components, emotion
-
-   npm i styled-components
-
-2. pure css(scss) + post css
-   ex) app.module.css
-
-3. tailwind
-   ex) 이미 작성된 class명으로 css 작성, 생산성 증가
-   - <div className="" />
-     클래스명만 잘 써주면 된다.
-
-css skill에는 큰 부담을 갖지 않아도 괜찮음
-css를 알고 있으면 어떤 것이는 적용하는데 큰 어려움이 없음
-모르는 것이더라도 배우는데 얼마 안걸린다.
+    css skill에는 큰 부담을 갖지 않아도 괜찮음
+    css를 알고 있으면 어떤 것이는 적용하는데 큰 어려움이 없음
+    모르는 것이더라도 배우는데 얼마 안걸린다.
 
 ---
 
-hook 함수
+## hook 함수
 
     react에서 화면이 랜더링되는 조건?
-        react의 컴포넌트에는 상태(state)라는 값이 존재, 해당 state가 변경되어야만 UI를 업데이트 합니다.
+    react의 컴포넌트에는 상태(state)라는 값이 존재, 해당 state가 변경되어야만 UI를 업데이트 합니다.
 
     과거에는 class component를 사용했고 life cycle(생명 주기)이라고 하는 이벤트 관리가 존재했습니다.
     페이지가 처음 열렸을 때 ~ 닫혔을 때까지의 상태 변화나 이벤트(함수) 트리거 등을 담당
@@ -892,8 +861,6 @@ hook 함수
         - 상태는 아니지만, 리랜더 되어도 값이 유지
         - html 요소에 접근하기 위해 사용, 그러나 react에서 dom api에 접근하는 행위는 지양
 
-    ------------------------------------------------------------------------------------
-
     (3) useMemo
         - * 함수가 실행되어 반환(return)하는 값 * 을 캐싱하고
           랜더링 되어도 연산을 다시하지 않고 (랜더링 함수가 재실행되면 함수 연산도 재실행되어야하지만 다시 하지 않음)
@@ -903,7 +870,7 @@ hook 함수
         - 랜더링 함수가 리랜더링 되면 함수나 변수등도 다시 선언하게 되는데, useCallback을 사용하여 선언한 함수는
           랜더링 되어도 ** 다시 선언하지 않고 * 저장되어있던 값을 재사용   / 선언과 결과값이 중요!!!
 
-    ex)
+        ex)
         상태가 변했어요! -> 리랜더링 -> 랜더함수 재실행 -> 복잡한 함수 실행시간 지연 -> 랜더링 지연
 
         1. 반드시 연산해야하는 경우 -> 랜더링 될 때마다 값이 달라지는 경우
@@ -924,21 +891,16 @@ hook 함수
             예시) 강사님 - 시간복잡도가 On2(반복문), axios 요청이 2회 이상 일어날 때
             기준은 내가 만들어야 한다. 제일 좋은 방법 - 시간 측정해서 퍼포먼스를 측정하는 것
 
-    ------------------------------------------------------------------------------------
-
     (5) useEffect
 
         페이지의 생명주기 동안 일으키고 싶은 외부 효과등을 제어할 수 있는 훅 함수
         => 페이지가 열려있는 동안, 여러분들이 특정 함수를 원하는 시기에 호출할 수 있음
-
         마운트(페이지가 처음 열렸을 때), 언마운트(페이지가 닫혔을 때), 의존성 배열의 값이 바뀌었을 때
 
-    ------------------------------------------------------------------------------------
+---
 
+## 전역 상태 관리
 
-
-
-    전역 상태 관리
     (global) --> 어떤 곳에서든 사용할 수 있는 상태
 
     어디서든 사용가능한 상태가 왜 필요할까?
@@ -952,26 +914,21 @@ hook 함수
         |
         c(컴포넌트) - A(상태)
 
-
     어떠한 방식으로 이루어질까 ?
-        1. Top to Bottom (flux)
-                flux 패턴
-                    페이스북에서 고안한 백엔드에서 View 로직을 관리하던 MVC패턴을 벗어나기 위한 단방향 패턴
-                    MVC( Model, View, Controller)
-                        백엔드에서 View와 관련된 로직도 관리, 어떠한 Model이나 어떤 Controller에서 에러가 났는지 발생하기 어려움
+    1. Top to Bottom (flux)
+        flux 패턴
+        페이스북에서 고안한 백엔드에서 View 로직을 관리하던 MVC패턴을 벗어나기 위한 단방향 패턴
+        MVC( Model, View, Controller)
+        백엔드에서 View와 관련된 로직도 관리, 어떠한 Model이나 어떤 Controller에서 에러가 났는지 발생하기 어려움
+        model -> 백엔드에서 db와 연결된 부분
+        controller -> 백엔드의 실제 로직
+        view -> 화면
 
-                model -> 백엔드에서 db와 연결된 부분
-                controller -> 백엔드의 실제 로직
-                view -> 화면
-
-                action(데이터) -> dispatcher(매개체) -> model(store) -> view
-
-                action -> 실제 데이터 객체 {}
-                dispatcher는 action을 store에 전달하기 위한 이벤트 핸들러
-                store는 실제 데이터가 저장되는 장소
-                view는 화면, store에 저장된 데이터를 가져다가 사용함
-
-    ------------------------------------------------------------------------------------------------------------
+        action(데이터) -> dispatcher(매개체) -> model(store) -> view
+        action -> 실제 데이터 객체 {}
+        dispatcher는 action을 store에 전달하기 위한 이벤트 핸들러
+        store는 실제 데이터가 저장되는 장소
+        view는 화면, store에 저장된 데이터를 가져다가 사용함
 
     React에서는 자체적으로 useContext hooks function -> DI(의존성 주입) -> 실무에서 굉장히 자주 사용
     -> 단점, 사용법이 불편함
@@ -1003,176 +960,121 @@ hook 함수
         - 이미 실무에서 많이 사용
         - jotai는 recoil 경량화 버전, zustand의 redux 경량화 버전 (시간부족 - x)
 
-    --------------------------------------------------------------------------------------------------
+---
 
-    내일
-        useReducer, useContext, reducerTodo(전역 상태화), 전역 상태를 통한 DI
+## Redux
 
-    다음주
-        redux, axiosTodo(백엔드 데이터 통신)
+    redux: 전역 상태 관리 라이브러리
+    useReducer와 context 기반, 사용법도 거의 유사, 단 조금 더 편리
+    dev-tools나 백엔드와의 데이터 통신을 위한 middle ware, logger 개발 편의 도구 등을 지원
+    치명적인 단점, 코드가 길어집니다. 구조가 복잡해요
+    npm i redux react-redux
 
-    --------------------------------------------------------------------------------------------------
+    * 미들웨어 (middle ware)
+    중간 통로 => 중간에서 데이터 조작 (로그, 인터셉터, 개발자 도구를 호출)
+    npm remove redux-devtools-extension redux-logger
+    npm i -D redux-devtools-extension redux-logger (rtk에서는 자동 지원)
 
-    const a = { ----> "123"
-        a: 1,
-        b: 2,
-        c: 3
-    }
+---
 
-    const b = a ---> "123"
-    const b = { ---> "456"
-        ...a
-    }
+    보일러 템플릿용 세팅 방법
 
-    const a = { ---> "123"
-        a: 1,
-        b: 2,
-        c: { ---> "789"
+    MSW (Mocking Service Worker) 가상 일꾼
+    -> 웹 페이지와 브라우저 사이에서 일하는 가상의 일꾼을 만들어
+    백엔드와 데이터 통신, 오프라인 캐싱, 푸시, 동기화 등을 담당
+    * 백엔드가 없어도 가상 일꾼을 통해 본인의 서버와 통신하여
+    데이터를 주고 받을 수 있음
 
-        }
-    }
+    장점 1. 개발 초기 단계, 백엔드의 개발이 진행되지 않았을 수 있음
+    -> msw가 있으면 백엔드 없이도 빠르게 프로토 타입 제작이 가능
+    즉, 프론트엔드 개발자가 백엔드와 통신을 유사하게 구현
 
-    const b = { ---> "456"
-        ...a
-        c: { ---> "789" --> lodash, deepCopy (깊은복사)
-           ...a.c (중첩 객체도 전개연산자)
-        }
-    }
-
-
-
-        ==========================================================================
-
-redux: 전역 상태 관리 라이브러리
-useReducer와 context 기반, 사용법도 거의 유사, 단 조금 더 편리
-dev-tools나 백엔드와의 데이터 통신을 위한 middle ware, logger 개발 편의 도구 등을 지원
-
-       현 취업 시장에서 가장 많이볼 수 있 도구입니다.
-       유지보수를 위해서
-
-       치명적인 단점, 코드가 길어집니다. 구조가 복잡해요
-       npm i redux react-redux
-
-       * 미들웨어 (middle ware)
-        중간 통로 => 중간에서 데이터 조작 (로그, 인터셉터, 개발자 도구를 호출)
-
-        npm remove redux-devtools-extension redux-logger
-        npm i -D redux-devtools-extension redux-logger (rtk에서는 자동 지원)
-
-==========================================================================
-
-보일러 템플릿용 세팅 방법
-
-MSW (Mocking Service Worker) 가상 일꾼
--> 웹 페이지와 브라우저 사이에서 일하는 가상의 일꾼을 만들어
-백엔드와 데이터 통신, 오프라인 캐싱, 푸시, 동기화 등을 담당
-
-       * 백엔드가 없어도 가상 일꾼을 통해 본인의 서버와 통신하여
-         데이터를 주고 받을 수 있음
-
-장점 1. 개발 초기 단계, 백엔드의 개발이 진행되지 않았을 수 있음
--> msw가 있으면 백엔드 없이도 빠르게 프로토 타입 제작이 가능
-즉, 프론트엔드 개발자가 백엔드와 통신을 유사하게 구현
-
-        * 프론트엔드 개발자의 중요한 덕목
-          내가 만들고자하는 화면에 백엔드에서 받와야하는 데이터는 과연 무엇일까?
-          이를 json data로 구현할 줄 알아야함
+    * 프론트엔드 개발자의 중요한 덕목
+    내가 만들고자하는 화면에 백엔드에서 받와야하는 데이터는 과연 무엇일까?
+    이를 json data로 구현할 줄 알아야함
 
     2. 백엔드 서버가 다운되어도 별개로 테스트를 통한 구현이 가능
       -> 백엔드 서버에 이상, 대체하여 백엔드 서버와 별개로 구현 가능
       -> api 응답 속도가 느릴 수 있는 경우에도 대체, 더 빠른 개발 가능
 
     3. 다양한 시도와 시뮬레이션이 가능 -> 백엔드에게 데이터 요청
-
     npm i msw
     npx msw init public
 
 ---
 
-    RTK(redux tool kit)
-      기존의 redux보다 짧은 보일러 코드, 자체적인 미들웨어 지원을 통한 DX(개발자경험) 향상
-      하지만, 여전히 사용에 불편함이 있던 것은 크게 달라지지 않았고 결국엔 사용하기 편리한
-      다양한 라이브러리들이 등장하면서 빛을 발하지는 못했습니다.
+## RTK(redux tool kit)
 
-      그러나 기존에 redux를 사용한 회사는 rtk로 많이 전환했다
+    기존의 redux보다 짧은 보일러 코드, 자체적인 미들웨어 지원을 통한 DX(개발자경험) 향상
+    하지만, 여전히 사용에 불편함이 있던 것은 크게 달라지지 않았고 결국엔 사용하기 편리한 다양한 라이브러리들이 등장하면서 빛을 발하지는 못했습니다.
+    그러나 기존에 redux를 사용한 회사는 rtk로 많이 전환했다
 
     redux의 백엔드와의 api 통신을 통해 받아온 상태의 전역 관리를 위한 미들웨어
-      1) saga
-        - 제너레이트를 활용, 중간 중간 함수를 중단시킬 수 있음
-        - 작성해야하는 코드량이 많음
-      2) thunk
-        - dispatch를 매개변수로 삼는 고차함수를 활용
-        - redux tool kit에서 자체 지원
+    1) saga
+    - 제너레이트를 활용, 중간 중간 함수를 중단시킬 수 있음
+    - 작성해야하는 코드량이 많음
+    2) thunk
+    - dispatch를 매개변수로 삼는 고차함수를 활용
+    - redux tool kit에서 자체 지원
+    eslint, prettier - 협업하며 코드를 작성할 때, 코드의 포멧과 문법을 일치시켜주는 라이브러리
 
 ---
 
-    eslint, prettier
-      협업하며 코드를 작성할 때, 코드의 포멧과 문법을 일치시켜주는 라이브러리
+## husky
 
----
-
-    husky
-      보통 eslint와 prettier 파일 형태로 양식에 맞게 작성
-      그러나 적용을 위해선 특정 명령어를 터미널에 입력해 주거나 모든 파일을 저장
-      그렇지 않으면 코드 포멧팅이 일치하지 않은 상태로 원격 저장소에 올라갈 수 있음
-
-      커밋/푸쉬 전에 자동으로 특정 명령어를 실행시켜 줌으로서
-      eslint, prettier를 자동으로 모든 파일에 맞춰줄 수 있는 라이브러리
-
----
-
+    보통 eslint와 prettier 파일 형태로 양식에 맞게 작성
+    그러나 적용을 위해선 특정 명령어를 터미널에 입력해 주거나 모든 파일을 저장
+    그렇지 않으면 코드 포멧팅이 일치하지 않은 상태로 원격 저장소에 올라갈 수 있음
+    커밋/푸쉬 전에 자동으로 특정 명령어를 실행시켜 줌으로서 eslint, prettier를 자동으로 모든 파일에 맞춰줄 수 있는 라이브러리
     npm i -D prettier eslint eslint-plugin-prettier eslint-plugin-react
     npm i -D eslint-plugin-unused-imports husky
 
-- 확장 프로그램
-  eslint-plugin-prettier : 기존에 있는 eslint에 prettier 기능과 prettier 충돌
-  eslint-plugin-react : eslint가 react 문법에 맞게 적용
-  eslint-plugin-unused-imports : 사용하지 않는 import를 자동 삭제
+### 확장 프로그램
 
-- 개발도중 생긴 에러, 라이브러리 최신 버전의 문제, 깃허브나 퍼블릭 포럼을 이용하여 해결 방법을 찾고
-  일회성으로 도입, 물론 이 이슈는 해결이 되지 않아서 앞으로도 계속 이렇게 될 수는 있음
+    eslint-plugin-prettier : 기존에 있는 eslint에 prettier 기능과 prettier 충돌
+    eslint-plugin-react : eslint가 react 문법에 맞게 적용
+    eslint-plugin-unused-imports : 사용하지 않는 import를 자동 삭제
 
-- eslint-plugin-unused-imports -> v3 -> @typescript-eslint/eslint-plugin v6.00
-  @typescript-eslint/eslint-plugin -> 5.60 -> update
+    개발도중 생긴 에러, 라이브러리 최신 버전의 문제, 깃허브나 퍼블릭 포럼을 이용하여 해결 방법을 찾고
+    일회성으로 도입, 물론 이 이슈는 해결이 되지 않아서 앞으로도 계속 이렇게 될 수는 있음
 
-  npm i -D @typescript-eslint/parser@latest
-  npm i -D @typescript-eslint/eslint-plugin
-  npm i -D eslint-plugin-unused-imports
+    eslint-plugin-unused-imports -> v3 -> @typescript-eslint/eslint-plugin v6.00
+    @typescript-eslint/eslint-plugin -> 5.60 -> update
 
----
+    npm i -D @typescript-eslint/parser@latest
+    npm i -D @typescript-eslint/eslint-plugin
+    npm i -D eslint-plugin-unused-imports
 
-husky
+### husky
 
-1. npx husky install --> .husky
-2. package.json -> script
-   "postinstall" : "husky install" -> npm i 하기 전에 npx husky install부터 한다
-   -> 다른 개발자들(협업)이 husky를 사용할 수 있도록
-
-3. commit/push 이전에 실행할 명령어
-   npx husky add .husky/pre-commit "npm run format && npm run lint:fix"
-   git add . git commit
+    1. npx husky install --> .husky
+    2. package.json -> script
+    "postinstall" : "husky install" -> npm i 하기 전에 npx husky install부터 한다
+    -> 다른 개발자들(협업)이 husky를 사용할 수 있도록
+    3. commit/push 이전에 실행할 명령어
+    npx husky add .husky/pre-commit "npm run format && npm run lint:fix"
+    git add . git commit
 
 ---
 
-npm run --> package.json의 scripts에 정의된 명령어를 실행
-=> prettier, eslint => 왜 사용해야하는가 => 똑같은 설정 위해 rc 파일 작성 및 공유 => husky로 깃훅 셋팅(pre-commit, pre-push)
+    npm run --> package.json의 scripts에 정의된 명령어를 실행
+    => prettier, eslint => 왜 사용해야하는가 => 똑같은 설정 위해 rc 파일 작성 및 공유 => husky로 깃훅 셋팅(pre-commit, pre-push)
 
     Q1. 리액트를 사용하는 이유를 설명해보세요 (2가지 이상)
     - 재사용 가능한 UI 구성 요소를 만들 수 있습니다. Components
     - 페이지 전체를 렌더링 하지 않고 렌더링이 필요한 부분만 렌더링 할 수 있습니다. Virtual DOM
 
-Q2. (Q1)을 통해 얻을 수 있는 장점은 무엇일까요? - 재사용이 용이하고 유지보수에 효율적 - state(상태)의 변화를 react에서 감지하고 있으며 state의 변화가 생긴다면
-해당 state를 가지고 있는 Components의 가상 돔과 실제 돔을 비교하여 변화가 생긴 Components만 리랜더링
+    Q2. (Q1)을 통해 얻을 수 있는 장점은 무엇일까요? - 재사용이 용이하고 유지보수에 효율적 - state(상태)의 변화를 react에서 감지하고 있으며 state의 변화가 생긴다면 해당 state를 가지고 있는 Components의 가상 돔과 실제 돔을 비교하여 변화가 생긴 Components만 리랜더링
 
-Q3. 리액트가 가상 돔을 사용하는 이유는 무엇일까요? - 불필요한 렌더링 과정을 최소화하기 위해서 - 변화를 한 해당 state를 가지고 있는 Components의 가상 돔과 실제 돔을 비교하여 변화가 생긴 Components만 리랜더링 - 개발자의 수고를 줄이기 위해서
+    Q3. 리액트가 가상 돔을 사용하는 이유는 무엇일까요? - 불필요한 렌더링 과정을 최소화하기 위해서 - 변화를 한 해당 state를 가지고 있는 Components의 가상 돔과 실제 돔을 비교하여 변화가 생긴 Components만 리랜더링 - 개발자의 수고를 줄이기 위해서
 
-Q4. 리액트가 가상 돔과 돔 트리를 비교하여 바뀐 부분이 있다면 화면을 다시 그리는 행위를 무엇이라 할까요? - 리랜더(Re-render)
+    Q4. 리액트가 가상 돔과 돔 트리를 비교하여 바뀐 부분이 있다면 화면을 다시 그리는 행위를 무엇이라 할까요? - 리랜더(Re-render)
 
-Q5. (Q3)의 행위를 통해 얻을 수 있는 이점은 무엇일까요? - 브라우저의 불필요한 렌더링 과정을 최소화해서 자원의 누수를 줄이고 개발자의 노동력적인 부분에서의 절약도 얻을 수 있다.
+    Q5. (Q3)의 행위를 통해 얻을 수 있는 이점은 무엇일까요? - 브라우저의 불필요한 렌더링 과정을 최소화해서 자원의 누수를 줄이고 개발자의 노동력적인 부분에서의 절약도 얻을 수 있다.
 
-Q6. (Q3)은 리액트에서 어느 순간에 실현될까요? - 가상 돔과 실제 돔을 비교하여 Components에 변화가 생겼을 때
+    Q6. (Q3)은 리액트에서 어느 순간에 실현될까요? - 가상 돔과 실제 돔을 비교하여 Components에 변화가 생겼을 때
 
-Q7. 훅 함수는 왜 만들게 되었을까요? 코드 재사용성을 위해서 만들어졌다.
+    Q7. 훅 함수는 왜 만들게 되었을까요? 코드 재사용성을 위해서 만들어졌다.
 
     아래의 훅 함수는 각 언제 선언되어야 할까요?
     (1) useState - state의 값이 변화하면 해당 컴포넌트를 리랜더링
@@ -1181,22 +1083,18 @@ Q7. 훅 함수는 왜 만들게 되었을까요? 코드 재사용성을 위해�
     (4) useCallback - 가독성 + 성능을 위해 콜백함수를 유즈콜백으로 사용하는 경우
     (5) useMemo - 해당 배열 내부의 state 값 혹은 값이 변경되면 해당 이펙트(함수)를 재실행할 때
 
-Q8. 커스텀 훅을 제작하면서 얻을 수 있는 이점은 무엇이고 어느 때 만들어야 할까요? - 코드, 로직의 간결해지고 가독성이 좋아진다 - 필요없는 반복을 줄이고 재사용성을 높인다 - 수정사항이 있을 시 커스텀 훅에서만 수정하면 되기 때문에 유지보수에 용이하다
+    Q8. 커스텀 훅을 제작하면서 얻을 수 있는 이점은 무엇이고 어느 때 만들어야 할까요? - 코드, 로직의 간결해지고 가독성이 좋아진다 - 필요없는 반복을 줄이고 재사용성을 높인다 - 수정사항이 있을 시 커스텀 훅에서만 수정하면 되기 때문에 유지보수에 용이하다
+    - 어느때 만들어야 하는가????
 
-        - 어느때 만들어야 하는가????
+    Q9. 리액트로 프로젝트를 만들려고할 때 고려해야하는 사항들을 아는대로 작성해보세요 (3가지 이상) - 유지보수성
+    - 확장성 - 재사용성
 
-Q9. 리액트로 프로젝트를 만들려고할 때 고려해야하는 사항들을 아는대로 작성해보세요 (3가지 이상) - 유지보수성
-
-- 확장성 - 재사용성
-
-Q10. 만약 위의 질문에 모두 답을 했다면, 현재 부족한 것은 리액트가 아닌 자바스크립트 일 수 있습니다
-이전 풀어보았던 자바스크립트 API 문제 1~4와 board 문제를 현재 풀이할 수 있는지 확인해보세요
-
+    Q10. 만약 위의 질문에 모두 답을 했다면, 현재 부족한 것은 리액트가 아닌 자바스크립트 일 수 있습니다
+    이전 풀어보았던 자바스크립트 API 문제 1~4와 board 문제를 현재 풀이할 수 있는지 확인해보세요
     react로 풀이를 한다고 가정했을 때와 (직접 바꿔보지는 말 것, 예제 문제와 유사)
     vanilla js(java script)로 풀이한다고 하였때 와의 차이점은 무엇일까요?
 
-Q11. 리액트에서 컴포넌트를 나누는 기준은 어떻게 되어야할까요?
-또한, 이러한 관점은 개발자마다 다를 수 있는데 왜 그럴까요?
-
-     - 컴포넌트는 재사용이 가능한 최소 UI 단위 / 하지만 웹이 수행하는 역할에 따라 다양하게 나뉘어질 수 있다.
-     - view, 로직, state등 다양한 기준으로 컴포넌트를 분리하기 때문에 개발자마다 다를 수 있다.
+    Q11. 리액트에서 컴포넌트를 나누는 기준은 어떻게 되어야할까요?
+    또한, 이러한 관점은 개발자마다 다를 수 있는데 왜 그럴까요?
+    - 컴포넌트는 재사용이 가능한 최소 UI 단위 / 하지만 웹이 수행하는 역할에 따라 다양하게 나뉘어질 수 있다.
+    - view, 로직, state등 다양한 기준으로 컴포넌트를 분리하기 때문에 개발자마다 다를 수 있다.
