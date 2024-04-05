@@ -29,24 +29,30 @@
         - NodeList
 ```
 
-- NodeList vs HttpCollection
+### NodeList vs HttpCollection
+
+```
   HttpCollection: live , 유사 배열 객체 + 이터러블
   NodeList: none-live , 유사 배열 객체 + 이터러블
+```
 
-        ex)
-            <div class="red"/>
-            <div class="red"/>
-            <div class="red"/>
+```jsx
+    ex)
+        <div class="red"/>
+        <div class="red"/>
+        <div class="red"/>
+        // const $els = document.getElementsByClassName('red')
+        const $els = document.querySelectorAll('.red')
+        for(let i =0; i<$els.length; i++){
+            $els[i].className = 'blue'
+        }
+```
 
-            // const $els = document.getElementsByClassName('red')
-            const $els = document.querySelectorAll('.red')
+### 유사배열객체
 
-            for(let i =0; i<$els.length; i++){
-                $els[i].className = 'blue'
-            }
+- 객체는 객체인데 배열의 속성을 가지고 있는 객체
 
-  - 유사배열객체
-    객체는 객체인데 배열의 속성을 가지고 있는 객체
+```jsx
     let obj {
     0: '1',
     1: '2',
@@ -66,9 +72,11 @@
     (1) Array.from(els)
     (2) const arr = [...els]
     (3) HTMLCollection.prototype.forEach = Array.prototype.forEach (권장x)
+```
 
 ---
 
+```jsx
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -99,9 +107,11 @@
         // console.log(idDom, idSelector)
     </script>
 </html>
+```
 
 ---
 
+```jsx
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -158,14 +168,16 @@
     </script>
 </body>
 </html>
+```
 
-DomAPI 왜 사용할까?
-사용자의 행위에 따라 HTML 요소(div,span)의 properties를 바꾸기 위해 사용합니다 => html, css 정적인 페이지 => 동적으로 만들기 위해서
+- DomAPI 왜 사용할까?
+  - 사용자의 행위에 따라 HTML 요소(div,span)의 properties를 바꾸기 위해 사용합니다 => html, css 정적인 페이지 => 동적으로 만들기 위해서
 
 ---
 
-selector
+### selector
 
+```jsx
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -201,3 +213,4 @@ selector
         // console.log(idDom, idSelector)
     </script>
 </html>
+```
