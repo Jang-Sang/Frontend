@@ -70,3 +70,80 @@ console.log(Math.random() _ 45); //0~43.999999
 console.log(Math.random() _ 45 + 1); //1 ~ 45.999999
 
 console.log(Math.floor(Math.random() \* 45 + 1)); // 1 45 정수
+
+```jsx
+const str = "Hello";
+
+// String prototype에 없는 함수 생성
+String.prototype.print = function () {
+  console.log("문자열입니다");
+};
+// 프로토 타입에 함수를 정의하면 모든 String 타입에 해당 메서드를 사용가능
+
+str.print();
+console.log(str.charAt(4)); // o - 5번째 스펠링
+console.log(str.concat("마이멜로디")); // Hello 마이멜로디
+console.log(str.indexOf("e")); // 1 - e가 몇번째 인지 검색
+console.log(str.split("e")); // [H, llo]
+
+const date = new Date();
+console.log(date);
+
+const date2 = new Date(2022, 8);
+console.log(date2);
+
+const year = date.getFullYear(); //2023
+const month = date.getMonth(); //6
+const ill = date.getDate(); //25
+const day = date.getDay(); // 요일(6) 일요일(0) 토요일(6)
+
+console.log(year, month, ill, day);
+
+// 날짜끼리 연산이 가능
+date.setFullYear(year - 1); // 2022
+date.setMonth(month - 1); //4
+
+console.log(date); // 2022-05월
+
+// 문자열로 변환이 가능
+date.toString(); //문자열
+date.toDateString(); // 시분초 생략
+date.toLocaleString(); // 현재 지역에 맞는 시간으로 변환
+date.toLocaleDateString(); // 현재 지역에 맞는 날짜
+
+console.log(date.toLocaleString()); // 새벽 6시 -> 오후3시
+console.log(date.toLocaleDateString());
+```
+
+```jsx
+const $idDom = document.querySelector("#id");
+const $classDom = document.querySelectorAll(".class");
+
+console.log($idDom, $classDom);
+
+/*
+getElementsByClassName (live, 유사배열객체)
+-> HTMLCollection
+-> 유사배열객체
+-> live DOM 객체
+-> forEach 사용불가능
+
+querySelectorAll(forEach, none-live, 유사배열객체)
+-> NodeList
+-> 유사배열객체
+-> none-live DOM 객체
+-> forEach 사용 가능하지만 배열은 아니므로 다른 메서드는 사용 불가 / 속성만 물려받음
+
+따라서 HTMLCollection 과 NodeList 모두 배열로 변환 후 사용하는 것을 지향
+
+"live" vs "non-live"
+*/
+
+// const $redList = document.getElementsByClassName('red');
+const $redList = document.querySelectorAll("red");
+console.log($redList);
+
+for (let i = 0; i < $redList.length; i++) {
+  $redList[i].className = "blue";
+}
+```
